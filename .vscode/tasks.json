@@ -6,13 +6,17 @@
             "type": "shell",
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "-DUNICODE",
-                "-D_UNICODE",
-                "${fileDirname}\\*.cpp",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "-fdiagnostics-color=always",                // Для кольорового виведення помилок
+                "-g",                                        // Для додавання дебаг-інформації
+                "-DUNICODE",                                 // Для підтримки Unicode
+                "-D_UNICODE",                                // Для підтримки Unicode
+                "-I", "${env:VCPKG_ROOT}/installed/x64-windows/include",  // Шлях до заголовочних файлів Boost
+                "-L", "${env:VCPKG_ROOT}/installed/x64-windows/lib",     // Шлях до бібліотек Boost
+                "${fileDirname}\\*.cpp",                      // Всі .cpp файли в поточній директорії
+                "-o", "${fileDirname}\\${fileBasenameNoExtension}.exe", // Виводити виконуваний файл
+                "-lboost_system",                            // Бібліотека Boost System
+                "-lboost_filesystem",                        // Бібліотека Boost Filesystem
+                "-lboost_multiprecision"                     // Бібліотека Boost Multiprecision
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -28,11 +32,15 @@
             "label": "C/C++: g++.exe build active file",
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "-fdiagnostics-color=always",               // Для кольорового виведення помилок
+                "-g",                                       // Для додавання дебаг-інформації
+                "-I", "${env:VCPKG_ROOT}/installed/x64-windows/include", // Шлях до заголовочних файлів Boost
+                "-L", "${env:VCPKG_ROOT}/installed/x64-windows/lib",    // Шлях до бібліотек Boost
+                "${file}",                                  // Поточний файл
+                "-o", "${fileDirname}\\${fileBasenameNoExtension}.exe",  // Виводити виконуваний файл
+                "-lboost_system",                           // Бібліотека Boost System
+                "-lboost_filesystem",                       // Бібліотека Boost Filesystem
+                "-lboost_multiprecision"                    // Бібліотека Boost Multiprecision
             ],
             "options": {
                 "cwd": "${fileDirname}"
